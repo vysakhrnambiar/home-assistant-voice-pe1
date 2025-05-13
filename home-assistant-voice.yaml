@@ -551,7 +551,7 @@ light:
           update_interval: 200ms
           lambda: |-
             static uint8_t index = 0;
-            Color color(0, 255, 0);  # Green color
+            Color color(0, 255, 0);  
             if (initial_run) {
               index = 0;
             }
@@ -1445,7 +1445,7 @@ speaker:
     dac_type: external
     channel: stereo
     timeout: never
-    buffer_duration: 100ms
+    buffer_duration: 500ms
     audio_dac: aic3204_dac
 
   # Virtual speakers to combine the announcement and media streams together into one output
@@ -1684,17 +1684,7 @@ voice_assistant:
     - lambda: id(voice_assistant_phase) = ${voice_assist_thinking_phase_id};
     - script.execute: control_leds
   on_tts_start:
-    # First, set the preparing to speak phase for the green animation
-    - lambda: id(voice_assistant_phase) = ${voice_assist_preparing_to_speak_phase_id};
-    - script.execute: control_leds
-    # Play a sound effect during the green animation
-    - script.execute:
-        id: play_sound
-        priority: true
-        sound_file: !lambda return id(center_button_triple_press_sound);
-    # Wait for 2 seconds to show the green animation
-    - delay: 2s
-    # Then change to the regular replying animation
+    # Set directly to replying phase (skip preparing to speak phase)
     - lambda: id(voice_assistant_phase) = ${voice_assist_replying_phase_id};
     - script.execute: control_leds
     # Start a script that would potentially enable the stop word if the response is longer than a second
