@@ -1011,6 +1011,8 @@ script:
             id(control_leds_voice_assistant_listening_for_command_phase).execute();
           } else if (id(voice_assistant_phase) == ${voice_assist_thinking_phase_id}) {
             id(control_leds_voice_assistant_thinking_phase).execute();
+          } else if (id(voice_assistant_phase) == ${voice_assist_preparing_to_speak_phase_id}) {
+            id(control_leds_voice_assistant_preparing_to_speak_phase).execute();
           } else if (id(voice_assistant_phase) == ${voice_assist_replying_phase_id}) {
             id(control_leds_voice_assistant_replying_phase).execute();
           } else if (id(voice_assistant_phase) == ${voice_assist_error_phase_id}) {
